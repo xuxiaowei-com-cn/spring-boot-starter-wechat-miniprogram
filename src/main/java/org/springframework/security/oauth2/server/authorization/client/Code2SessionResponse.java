@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 登录凭证校验 返回值
  *
  * @author xuxiaowei
- * @see 0.0.1
+ * @since 0.0.1
  * @see <a href=
  * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录凭证校验</a>
  */
