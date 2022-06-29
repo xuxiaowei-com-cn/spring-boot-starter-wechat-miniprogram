@@ -124,10 +124,7 @@ mvn spring-javaformat:apply
 
 ## 参考文档
 
-- [开始开发 - 接口测试号申请](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Requesting_an_API_Test_Account.html)
-    - [微信公众帐号测试号申请系统](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
-- [开始开发 - 获取Access token](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html)
-- [微信网页开发 - 网页授权](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)
+- [登录 - code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html)
 
 ## 鸣谢
 
