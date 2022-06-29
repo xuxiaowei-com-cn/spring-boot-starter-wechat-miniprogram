@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>3.0.0-M3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>cn.com.xuxiaowei.boot</groupId>
+	<groupId>cn.com.xuxiaowei.boot.next</groupId>
 	<artifactId>spring-boot-starter-webchat-miniprogram</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -18,18 +18,18 @@
 	<inceptionYear>2022</inceptionYear>
 
 	<properties>
-		<java.version>1.8</java.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- OAuth 2.1 依赖 -->
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
-		<!-- https://repo1.maven.org/maven2/org/springframework/security/spring-security-oauth2-authorization-server -->
-		<!-- https://github.com/spring-projects/spring-authorization-server -->
-		<spring-security-oauth2-authorization-server.version>0.3.1</spring-security-oauth2-authorization-server.version>
+		<!-- OAuth 2.1 依赖，支持 spring-boot 3.0.0 -->
+		<!-- https://mvnrepository.com/artifact/io.xuxiaowei.security.next/spring-security-oauth2-authorization-server -->
+		<!-- https://repo1.maven.org/maven2/io/xuxiaowei/security/next/spring-security-oauth2-authorization-server/ -->
+		<!-- https://github.com/xuxiaowei-io/spring-security-oauth2-authorization-server -->
+		<spring-security-oauth2-authorization-server-next.version>0.3.1</spring-security-oauth2-authorization-server-next.version>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
 		<maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -54,13 +54,28 @@
 	<dependencies>
 
 		<!-- OAuth 2.1 依赖 -->
-		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
+		<!-- https://mvnrepository.com/artifact/io.xuxiaowei.security.next/spring-security-oauth2-authorization-server -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
+			<groupId>io.xuxiaowei.security.next</groupId>
 			<artifactId>spring-security-oauth2-authorization-server</artifactId>
-			<version>${spring-security-oauth2-authorization-server.version}</version>
+			<version>${spring-security-oauth2-authorization-server-next.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -136,6 +151,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
 			</plugin>
 
 			<!-- mvn clean source:jar deploy -->
@@ -272,5 +291,34 @@
 		</profile>
 
 	</profiles>
+
+	<repositories>
+
+		<repository>
+			<id>repo1</id>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 </project>

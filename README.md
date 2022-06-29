@@ -89,7 +89,7 @@
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram/blob/main/pom.xml">
-    <img alt="Spring Boot" src="https://img.shields.io/static/v1?logo=Spring Boot&message=2.7.x&color=blue">
+    <img alt="Spring Boot" src="https://img.shields.io/static/v1?logo=Spring Boot&message=3.0.0-M3&color=blue">
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram/blob/main/pom.xml">
@@ -97,7 +97,7 @@
   </a>
 
   <a target="_blank" href="https://github.com/alibaba/dragonwell8/releases/tag/dragonwell-8.10.11_jdk8u322-ga">
-    <img alt="JDK" src="https://img.shields.io/badge/JDK-1.8.0_322-blue.svg"/>
+    <img alt="JDK" src="https://img.shields.io/badge/JDK-17.0.3-blue.svg"/>
   </a>
 
   <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">
