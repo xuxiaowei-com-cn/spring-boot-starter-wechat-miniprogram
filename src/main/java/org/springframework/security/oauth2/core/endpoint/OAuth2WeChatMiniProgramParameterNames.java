@@ -26,6 +26,8 @@ public interface OAuth2WeChatMiniProgramParameterNames {
 	 * @see <a href=
 	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
 	 * - code2Session</a>
+	 *
+	 * @see OAuth2ParameterNames#CODE
 	 */
 	String JS_CODE = "js_code";
 

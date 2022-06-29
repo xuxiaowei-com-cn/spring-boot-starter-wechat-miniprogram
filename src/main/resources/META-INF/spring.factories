@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties,\
+  org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2WeChatMiniProgramConfiguration
