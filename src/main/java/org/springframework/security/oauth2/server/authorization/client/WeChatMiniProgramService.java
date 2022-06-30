@@ -39,6 +39,21 @@ public interface WeChatMiniProgramService {
 			Map<String, Object> additionalParameters, Object details, String appid, String code, String openid,
 			Object credentials, String unionid, String sessionKey);
 
+	/**
+	 * 根据 AppID(小程序ID)、code、jsCode2SessionUrl 获取Token
+	 * @param appid AppID(小程序ID)
+	 * @param code <a href=
+	 * "https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html">开放接口
+	 * - 登录 - wx.login</a>，<a href=
+	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
+	 * - code2Session</a>
+	 * @param jsCode2SessionUrl <a href=
+	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
+	 * - code2Session</a>
+	 * @return 返回 <a href=
+	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
+	 * - code2Session</a>
+	 */
 	Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl);
 
 }
