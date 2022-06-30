@@ -72,7 +72,6 @@ public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
 
 		authenticationToken.setCredentials(credentials);
 		authenticationToken.setUnionid(unionid);
-		authenticationToken.setSessionKey(sessionKey);
 
 		return authenticationToken;
 	}

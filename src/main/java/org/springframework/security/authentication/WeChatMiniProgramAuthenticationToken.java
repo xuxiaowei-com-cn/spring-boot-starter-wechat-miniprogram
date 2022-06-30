@@ -125,13 +125,6 @@ public class WeChatMiniProgramAuthenticationToken extends AbstractAuthentication
 	@Setter
 	private String unionid;
 
-	/**
-	 * 会话密钥
-	 */
-	@Getter
-	@Setter
-	private String sessionKey;
-
 	public WeChatMiniProgramAuthenticationToken(Collection<? extends GrantedAuthority> authorities,
 			Authentication clientPrincipal, Authentication principal, UserDetails userDetails,
 			Map<String, Object> additionalParameters, Object details, String appid, String code, String openid) {
