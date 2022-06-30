@@ -109,6 +109,13 @@
   </a>
 </div>
 
+## 分支
+
+- main
+    - 支持 JDK 8、11
+- next
+    - 支持 JDK 17
+
 ## [代码格式规范 spring-javaformat](https://github.com/spring-io/spring-javaformat)
 
 - IntelliJ IDEA
