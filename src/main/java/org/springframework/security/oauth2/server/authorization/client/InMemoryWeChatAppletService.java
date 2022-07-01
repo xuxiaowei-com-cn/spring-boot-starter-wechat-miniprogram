@@ -9,8 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.endpoint.OAuth2WeChatMiniProgramParameterNames;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2WeChatMiniProgramEndpointUtils;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
@@ -111,13 +114,16 @@ public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
 			code2SessionResponse = objectMapper.readValue(forObject, Code2SessionResponse.class);
 		}
 		catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
+			OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE,
+					"使用微信小程序授权code：" + code + " 获取Token异常", OAuth2WeChatMiniProgramEndpointUtils.AUTH_CODE2SESSION_URI);
+			throw new OAuth2AuthenticationException(error, e);
 		}
 
 		String openid = code2SessionResponse.getOpenid();
 		if (openid == null) {
-			throw new RuntimeException(String.format("错误代码：%s，错误消息：%s", code2SessionResponse.getErrcode(),
-					code2SessionResponse.getErrmsg()));
+			OAuth2Error error = new OAuth2Error(code2SessionResponse.getErrcode(), code2SessionResponse.getErrmsg(),
+					OAuth2WeChatMiniProgramEndpointUtils.AUTH_CODE2SESSION_URI);
+			throw new OAuth2AuthenticationException(error);
 		}
 
 		return code2SessionResponse;
@@ -135,7 +141,7 @@ public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
 				return wechatMiniProgram.getSecret();
 			}
 		}
-		throw new IllegalArgumentException("未找到 secret");
+		throw new OAuth2AuthenticationException("未找到 secret");
 	}
 
 }

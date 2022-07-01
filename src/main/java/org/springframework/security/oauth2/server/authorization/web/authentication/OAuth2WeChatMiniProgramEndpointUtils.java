@@ -17,4 +17,9 @@ public class OAuth2WeChatMiniProgramEndpointUtils {
 	 */
 	public static final String AUTH_CODE2SESSION_URI = "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html";
 
+	/**
+	 * 错误代码
+	 */
+	public static final String ERROR_CODE = "C10000";
+
 }
