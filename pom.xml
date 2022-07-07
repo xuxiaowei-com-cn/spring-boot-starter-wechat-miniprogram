@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cn.com.xuxiaowei.boot</groupId>
-	<artifactId>spring-boot-starter-webchat-miniprogram</artifactId>
+	<artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>spring-boot-starter-webchat-miniprogram</name>
+	<name>spring-boot-starter-wechat-miniprogram</name>
 	<description>支持 OAuth 2.1 JWT 授权的微信小程序开发组件</description>
-	<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram</url>
+	<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram</url>
 	<inceptionYear>2022</inceptionYear>
 
 	<properties>
@@ -114,15 +114,15 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram</url>
-		<connection>scm:git:https://git@github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram.git
+		<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram</url>
+		<connection>scm:git:https://git@github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
 		</connection>
 		<developerConnection>http://xuxiaowei.com.cn</developerConnection>
 	</scm>
 
 	<issueManagement>
 		<system>Github</system>
-		<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-webchat-miniprogram/issues</url>
+		<url>https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram/issues</url>
 	</issueManagement>
 
 	<organization>
