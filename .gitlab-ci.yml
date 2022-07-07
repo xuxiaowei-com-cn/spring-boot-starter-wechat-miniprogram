@@ -33,6 +33,6 @@ deploy:
     - mvn clean -U package source:jar javadoc:jar deploy -Pgpg -DskipTests && echo 发布完成
   artifacts:
     paths:
-      - target/spring-boot-starter-webchat-miniprogram-*
+      - target/spring-boot-starter-wechat-miniprogram-*
   rules:
     - if: $CI_COMMIT_BRANCH == "next"
