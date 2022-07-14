@@ -49,7 +49,11 @@
   </a>
 
   <a target="_blank" href="https://s01.oss.sonatype.org/content/repositories/snapshots/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram">
-    <img alt="sonatype" src="https://img.shields.io/maven-metadata/v?label=sonatype&metadataUrl=https://s01.oss.sonatype.org/content/repositories/snapshots/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram/maven-metadata.xml">
+    <img alt="snapshots" src="https://img.shields.io/maven-metadata/v?label=snapshots&metadataUrl=https://s01.oss.sonatype.org/content/repositories/snapshots/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram/maven-metadata.xml">
+  </a>
+
+  <a target="_blank" href="https://s01.oss.sonatype.org/content/repositories/releases/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram">
+    <img alt="releases" src="https://img.shields.io/maven-metadata/v?label=releases&color=blue&metadataUrl=https://s01.oss.sonatype.org/content/repositories/releases/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram/maven-metadata.xml">
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram">
