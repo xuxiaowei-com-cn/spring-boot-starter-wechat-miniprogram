@@ -1,6 +1,7 @@
 package org.springframework.security.oauth2.server.authorization.web.authentication;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
@@ -13,6 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +56,20 @@ public class OAuth2WeChatMiniProgramAuthenticationConverter implements Authentic
 
 		// appid (REQUIRED)
 		String appid = parameters.getFirst(OAuth2WeChatMiniProgramParameterNames.APPID);
+		if (!StringUtils.hasText(appid)) {
+			// 若参数中缺省 appid，使用 Referer
+			Enumeration<String> headers = request.getHeaders(HttpHeaders.REFERER);
+			while (headers.hasMoreElements()) {
+				String nextElement = headers.nextElement();
+				if (StringUtils.hasText(nextElement)) {
+					String[] split = nextElement.split("/");
+					if (split.length > 3) {
+						appid = split[3];
+						parameters.add(OAuth2WeChatMiniProgramParameterNames.APPID, appid);
+					}
+				}
+			}
+		}
 		if (!StringUtils.hasText(appid) || parameters.get(OAuth2WeChatMiniProgramParameterNames.APPID).size() != 1) {
 			OAuth2EndpointUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST,
 					OAuth2WeChatMiniProgramParameterNames.APPID,
