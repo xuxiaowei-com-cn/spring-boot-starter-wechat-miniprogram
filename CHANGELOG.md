@@ -2,7 +2,7 @@
 
 ---
 
-## RELEASE JDK 8 Build 0.0.1-alpha.2 2022-07-14
+## JDK 8 Build 0.0.1-alpha.2 2022-07-14
 
 ### ⭐ New Features | 新功能
 
@@ -18,7 +18,7 @@
 
 ---
 
-## RELEASE JDK 8 Build 0.0.1-alpha.1 2022-07-14
+## JDK 8 Build 0.0.1-alpha.1 2022-07-14
 
 ### ⭐ New Features | 新功能
 
