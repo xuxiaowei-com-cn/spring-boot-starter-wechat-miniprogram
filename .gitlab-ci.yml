@@ -6,6 +6,12 @@ stages:
 deploy:
   stage: next
   image: maven:3.6.3-openjdk-17
+  variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  cache:
+    paths:
+      - .m2/repository
   script:
     - GPG_FILE=`find / -name xuxiaowei_0x97A36125_SECRET`
     - echo $GPG_FILE
@@ -27,6 +33,6 @@ deploy:
     - mvn clean -U package source:jar javadoc:jar deploy -Pgpg -DskipTests && echo 发布完成
   artifacts:
     paths:
-      - target/spring-boot-starter-webchat-miniprogram-*
+      - target/spring-boot-starter-wechat-miniprogram-*
   rules:
     - if: $CI_COMMIT_BRANCH == "next"
