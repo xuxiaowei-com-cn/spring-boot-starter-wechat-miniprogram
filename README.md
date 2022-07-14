@@ -131,6 +131,82 @@
   mvn spring-javaformat:apply
   ```
 
+## 使用方法
+
+```java
+package cloud.xuxiaowei.passport.configuration;
+
+import cloud.xuxiaowei.passport.handler.AccessTokenAuthenticationFailureHandlerImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2WeChatMiniProgramAuthenticationProvider;
+import org.springframework.security.oauth2.server.authorization.web.authentication.*;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import java.util.Arrays;
+
+/**
+ * Spring Security 配置
+ * <p>
+ * 详细使用说明参见：
+ * <p>
+ * <a href="https://gitee.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Gitee</a>
+ * <p>
+ * <a href="https://github.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Github</a>
+ *
+ * @author xuxiaowei
+ * @since 0.0.1
+ */
+@Configuration
+public class WebSecurityConfigurerAdapterConfiguration {
+
+    @Bean
+    @Order(-1)
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+
+        // 此段代码来自：OAuth2AuthorizationServerConfiguration#applyDefaultSecurity(HttpSecurity)
+        // @formatter:off
+        OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
+                new OAuth2AuthorizationServerConfigurer<>();
+        RequestMatcher endpointsMatcher = authorizationServerConfigurer
+                .getEndpointsMatcher();
+
+        http
+                .requestMatcher(endpointsMatcher)
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests.anyRequest().authenticated()
+                )
+                .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
+                .apply(authorizationServerConfigurer);
+        // @formatter:on
+
+        // 自定义客户授权
+        authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> tokenEndpointCustomizer
+                .accessTokenRequestConverter(new DelegatingAuthenticationConverter(Arrays.asList(
+                        // 新增：微信 OAuth2 用于验证授权授予的 {@link
+                        // OAuth2WeChatMiniProgramAuthenticationToken}
+                        new OAuth2WeChatMiniProgramAuthenticationConverter(),
+                        // 默认值：OAuth2 授权码认证转换器
+                        new OAuth2AuthorizationCodeAuthenticationConverter(),
+                        // 默认值：OAuth2 刷新令牌认证转换器
+                        new OAuth2RefreshTokenAuthenticationConverter(),
+                        // 默认值：OAuth2 客户端凭据身份验证转换器
+                        new OAuth2ClientCredentialsAuthenticationConverter())))
+                // 用于处理失败的身份验证尝试的策略。
+                .errorResponseHandler(new AccessTokenAuthenticationFailureHandlerImpl()));
+
+        // 微信小程序 OAuth2 身份验证提供程序
+        new OAuth2WeChatMiniProgramAuthenticationProvider(http);
+
+        return http.build();
+    }
+
+}
+```
+
 ## 参考文档
 
 - [登录 - code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html)
