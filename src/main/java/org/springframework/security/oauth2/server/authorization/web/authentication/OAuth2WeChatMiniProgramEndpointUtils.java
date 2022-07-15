@@ -22,4 +22,9 @@ public class OAuth2WeChatMiniProgramEndpointUtils {
 	 */
 	public static final String ERROR_CODE = "C10000";
 
+	/**
+	 * 无效错误代码
+	 */
+	public static final String INVALID_ERROR_CODE = "C20000";
+
 }
