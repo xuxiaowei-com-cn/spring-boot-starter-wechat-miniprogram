@@ -37,6 +37,7 @@
 1. 依赖引入
 
 ```xml
+
 <dependencies>
     <!-- OAuth 2.1 依赖 -->
     <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
@@ -46,12 +47,12 @@
         <version>0.3.1</version>
     </dependency>
 
-   <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot/spring-boot-starter-wechat-miniprogram -->
-   <dependency>
-      <groupId>cn.com.xuxiaowei.boot</groupId>
-      <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
-      <version>0.0.1-alpha.1</version>
-   </dependency>
+    <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot/spring-boot-starter-wechat-miniprogram -->
+    <dependency>
+        <groupId>cn.com.xuxiaowei.boot</groupId>
+        <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
+        <version>0.0.1-alpha.1</version>
+    </dependency>
 </dependencies>
 ```
 
