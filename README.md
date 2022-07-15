@@ -120,6 +120,8 @@
 - next
     - 支持 JDK 17
 
+## [更新日志](CHANGELOG.md)
+
 ## [代码格式规范 spring-javaformat](https://github.com/spring-io/spring-javaformat)
 
 - IntelliJ IDEA
