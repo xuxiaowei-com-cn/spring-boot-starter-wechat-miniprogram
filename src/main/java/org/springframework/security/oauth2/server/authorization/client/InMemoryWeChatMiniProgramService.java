@@ -28,7 +28,7 @@ import java.util.Map;
  * @author xuxiaowei
  * @since 0.0.1
  */
-public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
+public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramService {
 
 	private final List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList;
 
@@ -39,8 +39,8 @@ public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
 	 */
 	private final String defaultRole;
 
-	public InMemoryWeChatAppletService(List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList,
-			String defaultRole) {
+	public InMemoryWeChatMiniProgramService(List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList,
+											String defaultRole) {
 		this.wechatMiniProgramList = wechatMiniProgramList;
 		this.defaultRole = defaultRole;
 	}
