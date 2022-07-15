@@ -3,7 +3,7 @@ package org.springframework.security.config.annotation.web.configurers.oauth2.se
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatAppletService;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 
@@ -32,7 +32,7 @@ public class OAuth2WeChatMiniProgramConfigurerUtils {
 		if (wechatMiniProgramService == null) {
 			wechatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(builder, WeChatMiniProgramService.class);
 			if (wechatMiniProgramService == null) {
-				wechatMiniProgramService = new InMemoryWeChatAppletService(Collections.emptyList(),
+				wechatMiniProgramService = new InMemoryWeChatMiniProgramService(Collections.emptyList(),
 						"wechat_miniprogram");
 			}
 		}

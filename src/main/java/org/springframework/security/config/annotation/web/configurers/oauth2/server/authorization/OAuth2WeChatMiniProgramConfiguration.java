@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatAppletService;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 
@@ -32,7 +32,7 @@ public class OAuth2WeChatMiniProgramConfiguration {
 		List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList = wechatMiniProgramProperties
 				.getList();
 		String defaultRole = wechatMiniProgramProperties.getDefaultRole();
-		return new InMemoryWeChatAppletService(wechatMiniProgramList, defaultRole);
+		return new InMemoryWeChatMiniProgramService(wechatMiniProgramList, defaultRole);
 	}
 
 }
