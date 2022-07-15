@@ -36,21 +36,22 @@
 1. 依赖引入
 
 ```xml
-<dependencies>
-   <!-- OAuth 2.1 依赖 -->
-   <!-- https://mvnrepository.com/artifact/io.xuxiaowei.security.next/spring-security-oauth2-authorization-server -->
-   <dependency>
-      <groupId>io.xuxiaowei.security.next</groupId>
-      <artifactId>spring-security-oauth2-authorization-server</artifactId>
-      <version>0.3.1</version>
-   </dependency>
 
-   <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot.next/spring-boot-starter-wechat-miniprogram -->
-   <dependency>
-      <groupId>cn.com.xuxiaowei.boot.next</groupId>
-      <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
-      <version>0.0.1-alpha.1</version>
-   </dependency>
+<dependencies>
+    <!-- OAuth 2.1 依赖 -->
+    <!-- https://mvnrepository.com/artifact/io.xuxiaowei.security.next/spring-security-oauth2-authorization-server -->
+    <dependency>
+        <groupId>io.xuxiaowei.security.next</groupId>
+        <artifactId>spring-security-oauth2-authorization-server</artifactId>
+        <version>0.3.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot.next/spring-boot-starter-wechat-miniprogram -->
+    <dependency>
+        <groupId>cn.com.xuxiaowei.boot.next</groupId>
+        <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
+        <version>0.0.1-alpha.1</version>
+    </dependency>
 </dependencies>
 ```
 
