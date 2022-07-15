@@ -139,6 +139,30 @@
 
 ## 使用方法
 
+1. 依赖引入
+
+```xml
+
+<dependencies>
+    <!-- OAuth 2.1 依赖 -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-oauth2-authorization-server</artifactId>
+        <version>0.3.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot/spring-boot-starter-wechat-miniprogram -->
+    <dependency>
+        <groupId>cn.com.xuxiaowei.boot</groupId>
+        <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
+        <version>最新版</version>
+    </dependency>
+</dependencies>
+```
+
+2. 项目配置
+
 ```java
 package cloud.xuxiaowei.passport.configuration;
 
@@ -211,6 +235,37 @@ public class WebSecurityConfigurerAdapterConfiguration {
     }
 
 }
+```
+
+```yaml
+# 微信小程序配置
+wechat:
+  mini:
+    program:
+      # 默认微信小程序的权限
+      default-role: wechat_miniprogram
+      # 小程序账户列表
+      list:
+        - appid: ${wx_miniapp_appid:}
+          secret: ${wx_miniapp_secret:}
+```
+
+3. 微信小程序可使用下列URL获取授权Token
+
+- grant_type
+    - 必须使用 `wechat_miniprogram`
+- client_id
+    - OAuth 2 客户ID
+- client_secret
+    - OAuth 2 客户秘钥
+- appid
+    - 小程序appid
+    - 从 0.0.1-alpha.2 开始，参数缺省 `appid` 时，可以从请求头中的 `Referer` 中自动截取
+- code
+    - 微信登录授权码
+
+```
+/oauth2/token?grant_type=wechat_miniprogram&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&appid={APPID}&code={CODE}
 ```
 
 ## 参考文档
