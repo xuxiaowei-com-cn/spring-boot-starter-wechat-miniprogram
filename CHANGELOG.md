@@ -1,5 +1,13 @@
 # 更新日志
 
+--- 
+
+## JDK 8 Build 0.0.1-alpha.3
+
+### 🐞 Bug Fixes | 漏洞修补
+
+- 补全未找到小程序`secret`时抛出的异常信息
+
 ---
 
 ## JDK 8 Build 0.0.1-alpha.2 2022-07-14
