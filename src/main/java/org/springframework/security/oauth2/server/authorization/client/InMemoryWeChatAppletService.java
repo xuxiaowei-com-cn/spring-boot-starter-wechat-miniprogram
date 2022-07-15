@@ -141,7 +141,9 @@ public class InMemoryWeChatAppletService implements WeChatMiniProgramService {
 				return wechatMiniProgram.getSecret();
 			}
 		}
-		throw new OAuth2AuthenticationException("未找到 secret");
+		OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.INVALID_ERROR_CODE, "未找到 secret",
+				OAuth2WeChatMiniProgramEndpointUtils.AUTH_CODE2SESSION_URI);
+		throw new OAuth2AuthenticationException(error);
 	}
 
 }
