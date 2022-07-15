@@ -40,7 +40,7 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	private final String defaultRole;
 
 	public InMemoryWeChatMiniProgramService(List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList,
-											String defaultRole) {
+			String defaultRole) {
 		this.wechatMiniProgramList = wechatMiniProgramList;
 		this.defaultRole = defaultRole;
 	}
