@@ -1,6 +1,5 @@
 package org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers;
 
-import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
@@ -28,8 +27,7 @@ public class OAuth2WeChatMiniProgramConfigurerUtils {
 		return OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 	}
 
-	public static <B extends HttpSecurityBuilder<B>> WeChatMiniProgramService getWeChatMiniProgramService(
-			HttpSecurity httpSecurity) {
+	public static WeChatMiniProgramService getWeChatMiniProgramService(HttpSecurity httpSecurity) {
 		WeChatMiniProgramService wechatMiniProgramService = httpSecurity
 				.getSharedObject(WeChatMiniProgramService.class);
 		if (wechatMiniProgramService == null) {
