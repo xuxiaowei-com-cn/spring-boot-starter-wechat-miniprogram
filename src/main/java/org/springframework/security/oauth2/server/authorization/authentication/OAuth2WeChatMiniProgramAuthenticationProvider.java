@@ -5,16 +5,17 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AnonymousAuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2WeChatMiniProgramConfigurerUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.Code2SessionResponse;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2WeChatMiniProgramConfigurerUtils;
 import org.springframework.security.oauth2.server.authorization.context.ProviderContextHolder;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationProvider;
 import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
@@ -45,6 +46,11 @@ import java.util.Set;
  * @see OidcUserInfoAuthenticationProvider
  */
 public class OAuth2WeChatMiniProgramAuthenticationProvider implements AuthenticationProvider {
+
+	/**
+	 * @see OAuth2TokenContext#getAuthorizedScopes()
+	 */
+	private static final String AUTHORIZED_SCOPE_KEY = OAuth2Authorization.class.getName().concat(".AUTHORIZED_SCOPE");
 
 	/**
 	 * auth.code2Session
@@ -121,7 +127,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 				unionid, sessionKey);
 
 		builder.attribute(Principal.class.getName(), abstractAuthenticationToken);
-		builder.attribute(OAuth2Authorization.AUTHORIZED_SCOPE_ATTRIBUTE_NAME, requestedScopes);
+		builder.attribute(AUTHORIZED_SCOPE_KEY, requestedScopes);
 
 		OAuth2Authorization authorization = builder.build();
 
@@ -131,7 +137,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 				.principal(authorization.getAttribute(Principal.class.getName()))
 				.providerContext(ProviderContextHolder.getProviderContext())
 				.authorization(authorization)
-				.authorizedScopes(authorization.getAttribute(OAuth2Authorization.AUTHORIZED_SCOPE_ATTRIBUTE_NAME))
+				.authorizedScopes(authorization.getAttribute(AUTHORIZED_SCOPE_KEY))
 				.authorizationGrantType(OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM)
 				.authorizationGrant(grantAuthenticationToken);
 		// @formatter:on
