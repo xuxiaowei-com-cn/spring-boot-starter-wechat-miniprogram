@@ -101,7 +101,7 @@
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram/blob/main/pom.xml">
-    <img alt="OAuth 2.1" src="https://img.shields.io/static/v1?label=OAuth 2.1&message=0.3.1&color=blue">
+    <img alt="OAuth 2.1" src="https://img.shields.io/static/v1?label=OAuth 2.1&message=0.4.0-M1&color=blue">
   </a>
 
   <a target="_blank" href="https://github.com/alibaba/dragonwell8/releases/tag/dragonwell-8.10.11_jdk8u322-ga">
@@ -149,14 +149,14 @@
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-oauth2-authorization-server</artifactId>
-        <version>0.3.1</version>
+        <version>0.4.0-M1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot/spring-boot-starter-wechat-miniprogram -->
     <dependency>
         <groupId>cn.com.xuxiaowei.boot</groupId>
         <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
-        <version>最新版</version>
+        <version>0.0.2-alpha.1</version>
     </dependency>
 </dependencies>
 ```
@@ -166,12 +166,14 @@
 ```java
 package cloud.xuxiaowei.passport.configuration;
 
-import cloud.xuxiaowei.passport.handler.AccessTokenAuthenticationFailureHandlerImpl;
+// import cloud.xuxiaowei.passport.handler.AccessTokenAuthenticationFailureHandlerImpl;
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2WeChatMiniProgramAuthenticationProvider;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.web.authentication.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -183,9 +185,11 @@ import java.util.Arrays;
  * <p>
  * 详细使用说明参见：
  * <p>
- * <a href="https://gitee.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Gitee</a>
+ * <a href=
+ * "https://gitee.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Gitee</a>
  * <p>
- * <a href="https://github.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Github</a>
+ * <a href=
+ * "https://github.com/xuxiaowei-cloud/xuxiaowei-cloud/blob/main/passport/src/main/java/cloud/xuxiaowei/passport/configuration/AuthorizationServerConfiguration.java">Github</a>
  *
  * @author xuxiaowei
  * @since 0.0.1
@@ -199,8 +203,8 @@ public class WebSecurityConfigurerAdapterConfiguration {
 
         // 此段代码来自：OAuth2AuthorizationServerConfiguration#applyDefaultSecurity(HttpSecurity)
         // @formatter:off
-        OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer =
-                new OAuth2AuthorizationServerConfigurer<>();
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
+                new OAuth2AuthorizationServerConfigurer();
         RequestMatcher endpointsMatcher = authorizationServerConfigurer
                 .getEndpointsMatcher();
 
@@ -215,18 +219,19 @@ public class WebSecurityConfigurerAdapterConfiguration {
 
         // 自定义客户授权
         authorizationServerConfigurer.tokenEndpoint(tokenEndpointCustomizer -> tokenEndpointCustomizer
-                .accessTokenRequestConverter(new DelegatingAuthenticationConverter(Arrays.asList(
-                        // 新增：微信 OAuth2 用于验证授权授予的 {@link
-                        // OAuth2WeChatMiniProgramAuthenticationToken}
-                        new OAuth2WeChatMiniProgramAuthenticationConverter(),
-                        // 默认值：OAuth2 授权码认证转换器
-                        new OAuth2AuthorizationCodeAuthenticationConverter(),
-                        // 默认值：OAuth2 刷新令牌认证转换器
-                        new OAuth2RefreshTokenAuthenticationConverter(),
-                        // 默认值：OAuth2 客户端凭据身份验证转换器
-                        new OAuth2ClientCredentialsAuthenticationConverter())))
+                        .accessTokenRequestConverter(new DelegatingAuthenticationConverter(Arrays.asList(
+                                // 新增：微信 OAuth2 用于验证授权授予的 {@link
+                                // OAuth2WeChatMiniProgramAuthenticationToken}
+                                new OAuth2WeChatMiniProgramAuthenticationConverter(),
+                                // 默认值：OAuth2 授权码认证转换器
+                                new OAuth2AuthorizationCodeAuthenticationConverter(),
+                                // 默认值：OAuth2 刷新令牌认证转换器
+                                new OAuth2RefreshTokenAuthenticationConverter(),
+                                // 默认值：OAuth2 客户端凭据身份验证转换器
+                                new OAuth2ClientCredentialsAuthenticationConverter())))
                 // 用于处理失败的身份验证尝试的策略。
-                .errorResponseHandler(new AccessTokenAuthenticationFailureHandlerImpl()));
+                // .errorResponseHandler(new AccessTokenAuthenticationFailureHandlerImpl())
+        );
 
         // 微信小程序 OAuth2 身份验证提供程序
         new OAuth2WeChatMiniProgramAuthenticationProvider(http);
@@ -258,7 +263,7 @@ wechat:
     - OAuth 2 客户ID
 - client_secret
     - OAuth 2 客户秘钥
-- appid
+- appid（可缺省）
     - 小程序appid
     - 从 0.0.1-alpha.2 开始，参数缺省 `appid` 时，可以从请求头中的 `Referer` 中自动截取
 - code

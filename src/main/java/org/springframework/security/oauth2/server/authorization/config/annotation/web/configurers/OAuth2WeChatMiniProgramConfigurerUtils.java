@@ -1,6 +1,6 @@
-package org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization;
+package org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers;
 
-import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatMiniProgramService;
@@ -16,21 +16,23 @@ import java.util.Collections;
  * @since 0.0.1
  * @see OAuth2ConfigurerUtils
  */
+@SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 public class OAuth2WeChatMiniProgramConfigurerUtils {
 
-	public static <B extends HttpSecurityBuilder<B>> OAuth2AuthorizationService getAuthorizationService(B builder) {
-		return OAuth2ConfigurerUtils.getAuthorizationService(builder);
+	public static OAuth2AuthorizationService getAuthorizationService(HttpSecurity httpSecurity) {
+		return OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
 	}
 
-	public static <B extends HttpSecurityBuilder<B>> OAuth2TokenGenerator<? extends OAuth2Token> getTokenGenerator(
-			B builder) {
-		return OAuth2ConfigurerUtils.getTokenGenerator(builder);
+	public static OAuth2TokenGenerator<? extends OAuth2Token> getTokenGenerator(HttpSecurity httpSecurity) {
+		return OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 	}
 
-	public static <B extends HttpSecurityBuilder<B>> WeChatMiniProgramService getWeChatMiniProgramService(B builder) {
-		WeChatMiniProgramService wechatMiniProgramService = builder.getSharedObject(WeChatMiniProgramService.class);
+	public static WeChatMiniProgramService getWeChatMiniProgramService(HttpSecurity httpSecurity) {
+		WeChatMiniProgramService wechatMiniProgramService = httpSecurity
+				.getSharedObject(WeChatMiniProgramService.class);
 		if (wechatMiniProgramService == null) {
-			wechatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(builder, WeChatMiniProgramService.class);
+			wechatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity,
+					WeChatMiniProgramService.class);
 			if (wechatMiniProgramService == null) {
 				wechatMiniProgramService = new InMemoryWeChatMiniProgramService(Collections.emptyList(),
 						"wechat_miniprogram");
