@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.server.authorization.client.Code2Sess
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2WeChatMiniProgramConfigurerUtils;
-import org.springframework.security.oauth2.server.authorization.context.ProviderContextHolder;
+import org.springframework.security.oauth2.server.authorization.context.AuthorizationServerContextHolder;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationProvider;
 import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext;
@@ -135,7 +135,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 		DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
 				.registeredClient(registeredClient)
 				.principal(authorization.getAttribute(Principal.class.getName()))
-				.providerContext(ProviderContextHolder.getProviderContext())
+				.authorizationServerContext(AuthorizationServerContextHolder.getContext())
 				.authorization(authorization)
 				.authorizedScopes(authorization.getAttribute(AUTHORIZED_SCOPE_KEY))
 				.authorizationGrantType(OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM)
