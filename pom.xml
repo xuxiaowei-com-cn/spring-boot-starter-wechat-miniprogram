@@ -10,7 +10,7 @@
     </parent>
     <groupId>cn.com.xuxiaowei.boot.next</groupId>
     <artifactId>spring-boot-starter-wechat-miniprogram</artifactId>
-    <version>0.0.2-alpha.2</version>
+    <version>0.0.3-alpha.1</version>
 
     <name>spring-boot-starter-wechat-miniprogram</name>
     <description>支持 OAuth 2.1 JWT 授权的微信小程序开发组件</description>
@@ -30,7 +30,7 @@
         <!-- https://oss.sonatype.org/content/repositories/public/org/springframework/security/spring-security-oauth2-authorization-server -->
         <!-- https://repo.spring.io/ui/native/milestone/org/springframework/security/spring-security-oauth2-authorization-server -->
         <!-- https://github.com/spring-projects/spring-authorization-server -->
-        <spring-security-oauth2-authorization-server.version>1.0.0-M1
+        <spring-security-oauth2-authorization-server.version>1.0.0-M2
         </spring-security-oauth2-authorization-server.version>
 
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
