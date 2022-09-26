@@ -1,6 +1,12 @@
 # 更新日志
 --- 
 
+## JDK 8 Build 0.0.3-alpha.1
+
+### 🔨 Dependency Upgrades | 依赖项升级
+
+- spring-security-oauth2-authorization-server 从 0.4.0-M1 升级 到 0.4.0-M2
+
 ## JDK 8 Build 0.0.2-alpha.1
 
 ### 🔨 Dependency Upgrades | 依赖项升级
