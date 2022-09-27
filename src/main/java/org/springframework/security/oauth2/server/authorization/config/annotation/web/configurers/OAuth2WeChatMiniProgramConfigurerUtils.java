@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 
 import java.util.Collections;
 
+import static org.springframework.security.oauth2.server.authorization.authentication.OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM;
+
 /**
  * 微信小程序 OAuth 2.0 配置器的实用方法。
  *
@@ -35,7 +37,7 @@ public class OAuth2WeChatMiniProgramConfigurerUtils {
 					WeChatMiniProgramService.class);
 			if (wechatMiniProgramService == null) {
 				wechatMiniProgramService = new InMemoryWeChatMiniProgramService(Collections.emptyList(),
-						"wechat_miniprogram");
+						WECHAT_MINIPROGRAM.getValue());
 			}
 		}
 		return wechatMiniProgramService;
