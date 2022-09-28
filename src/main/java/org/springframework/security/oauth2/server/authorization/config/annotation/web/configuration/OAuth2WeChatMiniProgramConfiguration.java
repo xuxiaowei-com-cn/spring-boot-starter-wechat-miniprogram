@@ -1,4 +1,4 @@
-package org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization;
+package org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

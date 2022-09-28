@@ -1,2 +1,2 @@
 org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties
-org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2WeChatMiniProgramConfiguration
+org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2WeChatMiniProgramConfiguration
