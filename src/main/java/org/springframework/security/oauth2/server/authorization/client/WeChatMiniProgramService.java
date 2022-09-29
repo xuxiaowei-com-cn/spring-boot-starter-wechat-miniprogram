@@ -2,6 +2,7 @@ package org.springframework.security.oauth2.server.authorization.client;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 
 import java.util.Map;
 
@@ -55,5 +56,12 @@ public interface WeChatMiniProgramService {
 	 * - code2Session</a>
 	 */
 	Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl);
+
+	/**
+	 * 根据 appid 获取 微信小程序属性配置
+	 * @param appid 小程序ID
+	 * @return 返回 微信小程序属性配置
+	 */
+	WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid);
 
 }

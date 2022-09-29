@@ -69,7 +69,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 	private OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
 
 	@Setter
-	private WeChatMiniProgramService wechatMiniProgramService;
+	private WeChatMiniProgramService weChatMiniProgramService;
 
 	public OAuth2WeChatMiniProgramAuthenticationProvider(HttpSecurity builder) {
 		Assert.notNull(builder, "HttpSecurity 不能为空");
@@ -111,7 +111,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		Code2SessionResponse code2SessionResponse = wechatMiniProgramService.getCode2SessionResponse(appid, code,
+		Code2SessionResponse code2SessionResponse = weChatMiniProgramService.getCode2SessionResponse(appid, code,
 				JS_CODE2_SESSION_URL);
 
 		String openid = code2SessionResponse.getOpenid();
@@ -122,7 +122,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 		builder.principalName(openid);
 		builder.authorizationGrantType(OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM);
 
-		AbstractAuthenticationToken abstractAuthenticationToken = wechatMiniProgramService.authenticationToken(
+		AbstractAuthenticationToken abstractAuthenticationToken = weChatMiniProgramService.authenticationToken(
 				clientPrincipal, additionalParameters, grantAuthenticationToken.getDetails(), appid, code, openid, null,
 				unionid, sessionKey);
 
@@ -205,8 +205,8 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			tokenGenerator = OAuth2WeChatMiniProgramConfigurerUtils.getTokenGenerator(builder);
 		}
 
-		if (wechatMiniProgramService == null) {
-			wechatMiniProgramService = OAuth2WeChatMiniProgramConfigurerUtils.getWeChatMiniProgramService(builder);
+		if (weChatMiniProgramService == null) {
+			weChatMiniProgramService = OAuth2WeChatMiniProgramConfigurerUtils.getWeChatMiniProgramService(builder);
 		}
 	}
 
