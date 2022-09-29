@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.endpoint.OAuth2WeChatMiniProgramParameterNames;
+import org.springframework.security.oauth2.server.authorization.exception.AppidWeChatMiniProgramException;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2WeChatMiniProgramEndpointUtils;
 import org.springframework.util.Assert;
@@ -30,19 +31,10 @@ import java.util.Map;
  */
 public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramService {
 
-	private final List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList;
+	private final WeChatMiniProgramProperties weChatMiniProgramProperties;
 
-	/**
-	 * 默认微信小程序的权限
-	 * <p>
-	 * 若要自定义用户的权限，请开发者自己实现 {@link WeChatMiniProgramService}
-	 */
-	private final String defaultRole;
-
-	public InMemoryWeChatMiniProgramService(List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList,
-			String defaultRole) {
-		this.wechatMiniProgramList = wechatMiniProgramList;
-		this.defaultRole = defaultRole;
+	public InMemoryWeChatMiniProgramService(WeChatMiniProgramProperties weChatMiniProgramProperties) {
+		this.weChatMiniProgramProperties = weChatMiniProgramProperties;
 	}
 
 	/**
@@ -63,7 +55,7 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 			Map<String, Object> additionalParameters, Object details, String appid, String code, String openid,
 			Object credentials, String unionid, String sessionKey) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(defaultRole);
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(weChatMiniProgramProperties.getDefaultRole());
 		authorities.add(authority);
 		User user = new User(openid, sessionKey, authorities);
 
@@ -130,20 +122,35 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	}
 
 	/**
+	 * 根据 appid 获取 微信小程序属性配置
+	 * @param appid 小程序ID
+	 * @return 返回 微信小程序属性配置
+	 */
+	@Override
+	public WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid) {
+		List<WeChatMiniProgramProperties.WeChatMiniProgram> list = weChatMiniProgramProperties.getList();
+		if (list == null) {
+			throw new AppidWeChatMiniProgramException("appid 未配置");
+		}
+
+		for (WeChatMiniProgramProperties.WeChatMiniProgram weChatMiniProgram : list) {
+			if (appid.equals(weChatMiniProgram.getAppid())) {
+				return weChatMiniProgram;
+			}
+		}
+
+		throw new AppidWeChatMiniProgramException("未匹配到 appid");
+	}
+
+	/**
 	 * 根据 AppID(小程序ID) 查询 AppSecret(小程序密钥)
 	 * @param appid AppID(小程序ID)
 	 * @return 返回 AppSecret(小程序密钥)
 	 */
 	public String getSecretByAppid(String appid) {
 		Assert.notNull(appid, "appid 不能为 null");
-		for (WeChatMiniProgramProperties.WeChatMiniProgram wechatMiniProgram : wechatMiniProgramList) {
-			if (appid.equals(wechatMiniProgram.getAppid())) {
-				return wechatMiniProgram.getSecret();
-			}
-		}
-		OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.INVALID_ERROR_CODE, "未找到 secret",
-				OAuth2WeChatMiniProgramEndpointUtils.AUTH_CODE2SESSION_URI);
-		throw new OAuth2AuthenticationException(error);
+		WeChatMiniProgramProperties.WeChatMiniProgram weChatMiniProgram = getWeChatMiniProgramByAppid(appid);
+		return weChatMiniProgram.getSecret();
 	}
 
 }

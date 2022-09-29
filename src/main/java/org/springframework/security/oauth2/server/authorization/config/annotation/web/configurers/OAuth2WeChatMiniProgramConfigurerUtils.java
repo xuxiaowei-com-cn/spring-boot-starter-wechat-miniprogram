@@ -5,11 +5,8 @@ import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryWeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
+import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-
-import java.util.Collections;
-
-import static org.springframework.security.oauth2.server.authorization.authentication.OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM;
 
 /**
  * 微信小程序 OAuth 2.0 配置器的实用方法。
@@ -30,17 +27,18 @@ public class OAuth2WeChatMiniProgramConfigurerUtils {
 	}
 
 	public static WeChatMiniProgramService getWeChatMiniProgramService(HttpSecurity httpSecurity) {
-		WeChatMiniProgramService wechatMiniProgramService = httpSecurity
+		WeChatMiniProgramService weChatMiniProgramService = httpSecurity
 				.getSharedObject(WeChatMiniProgramService.class);
-		if (wechatMiniProgramService == null) {
-			wechatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity,
+		if (weChatMiniProgramService == null) {
+			weChatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity,
 					WeChatMiniProgramService.class);
-			if (wechatMiniProgramService == null) {
-				wechatMiniProgramService = new InMemoryWeChatMiniProgramService(Collections.emptyList(),
-						WECHAT_MINIPROGRAM.getValue());
+			if (weChatMiniProgramService == null) {
+				WeChatMiniProgramProperties weChatMiniProgramProperties = OAuth2ConfigurerUtils
+						.getOptionalBean(httpSecurity, WeChatMiniProgramProperties.class);
+				weChatMiniProgramService = new InMemoryWeChatMiniProgramService(weChatMiniProgramProperties);
 			}
 		}
-		return wechatMiniProgramService;
+		return weChatMiniProgramService;
 	}
 
 }

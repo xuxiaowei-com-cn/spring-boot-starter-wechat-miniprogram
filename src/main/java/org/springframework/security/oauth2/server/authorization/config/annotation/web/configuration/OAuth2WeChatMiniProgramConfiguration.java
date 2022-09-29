@@ -8,8 +8,6 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryW
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 
-import java.util.List;
-
 /**
  * 微信小程序 配置
  *
@@ -19,20 +17,17 @@ import java.util.List;
 @Configuration
 public class OAuth2WeChatMiniProgramConfiguration {
 
-	private WeChatMiniProgramProperties wechatMiniProgramProperties;
+	private WeChatMiniProgramProperties weChatMiniProgramProperties;
 
 	@Autowired
-	public void setWechatMiniProgramProperties(WeChatMiniProgramProperties wechatMiniProgramProperties) {
-		this.wechatMiniProgramProperties = wechatMiniProgramProperties;
+	public void setWeChatMiniProgramProperties(WeChatMiniProgramProperties weChatMiniProgramProperties) {
+		this.weChatMiniProgramProperties = weChatMiniProgramProperties;
 	}
 
 	@Bean
 	@ConditionalOnMissingBean
 	public WeChatMiniProgramService weChatMiniProgramService() {
-		List<WeChatMiniProgramProperties.WeChatMiniProgram> wechatMiniProgramList = wechatMiniProgramProperties
-				.getList();
-		String defaultRole = wechatMiniProgramProperties.getDefaultRole();
-		return new InMemoryWeChatMiniProgramService(wechatMiniProgramList, defaultRole);
+		return new InMemoryWeChatMiniProgramService(weChatMiniProgramProperties);
 	}
 
 }
