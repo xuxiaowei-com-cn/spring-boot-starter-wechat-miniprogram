@@ -130,7 +130,8 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	public WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid) {
 		List<WeChatMiniProgramProperties.WeChatMiniProgram> list = weChatMiniProgramProperties.getList();
 		if (list == null) {
-			throw new AppidWeChatMiniProgramException("appid 未配置");
+			OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE, "appid 未配置", null);
+			throw new AppidWeChatMiniProgramException(error);
 		}
 
 		for (WeChatMiniProgramProperties.WeChatMiniProgram weChatMiniProgram : list) {
@@ -138,8 +139,8 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 				return weChatMiniProgram;
 			}
 		}
-
-		throw new AppidWeChatMiniProgramException("未匹配到 appid");
+		OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE, "未匹配到 appid", null);
+		throw new AppidWeChatMiniProgramException(error);
 	}
 
 	/**
