@@ -97,14 +97,14 @@
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram/blob/main/pom.xml">
-    <img alt="Spring Boot" src="https://img.shields.io/static/v1?logo=Spring Boot&message=3.0.0-M3&color=blue">
+    <img alt="Spring Boot" src="https://img.shields.io/static/v1?logo=Spring Boot&message=3.0.0-M5">
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram/blob/main/pom.xml">
     <img alt="OAuth 2.1" src="https://img.shields.io/static/v1?label=OAuth 2.1&message=1.0.0-M2&color=blue">
   </a>
 
-  <a target="_blank" href="https://github.com/alibaba/dragonwell8/releases/tag/dragonwell-8.10.11_jdk8u322-ga">
+  <a target="_blank" href="https://github.com/alibaba/dragonwell17/releases/tag/dragonwell-17.0.3.0.3%2B7_jdk-17.0.3-ga">
     <img alt="JDK" src="https://img.shields.io/badge/JDK-17.0.3-blue.svg"/>
   </a>
 
