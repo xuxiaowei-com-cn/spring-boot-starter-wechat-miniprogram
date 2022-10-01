@@ -1,8 +1,13 @@
 package org.springframework.security.oauth2.server.authorization.client;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2TokenEndpointConfigurer;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import java.util.Map;
 
@@ -35,10 +40,14 @@ public interface WeChatMiniProgramService {
 	 * 机制说明</a>。
 	 * @param sessionKey 会话密钥
 	 * @return 返回 认证信息
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
 	AbstractAuthenticationToken authenticationToken(Authentication clientPrincipal,
 			Map<String, Object> additionalParameters, Object details, String appid, String code, String openid,
-			Object credentials, String unionid, String sessionKey);
+			Object credentials, String unionid, String sessionKey) throws OAuth2AuthenticationException;
 
 	/**
 	 * 根据 AppID(小程序ID)、code、jsCode2SessionUrl 获取Token
@@ -54,14 +63,24 @@ public interface WeChatMiniProgramService {
 	 * @return 返回 <a href=
 	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
 	 * - code2Session</a>
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
-	Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl);
+	Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl)
+			throws OAuth2AuthenticationException;
 
 	/**
 	 * 根据 appid 获取 微信小程序属性配置
 	 * @param appid 小程序ID
 	 * @return 返回 微信小程序属性配置
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
-	WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid);
+	WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid)
+			throws OAuth2AuthenticationException;
 
 }

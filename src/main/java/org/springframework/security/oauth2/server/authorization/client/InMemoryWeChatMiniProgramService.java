@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.WeChatMiniProgramAuthenticationToken;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,9 +13,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.endpoint.OAuth2WeChatMiniProgramParameterNames;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2TokenEndpointConfigurer;
 import org.springframework.security.oauth2.server.authorization.exception.AppidWeChatMiniProgramException;
 import org.springframework.security.oauth2.server.authorization.properties.WeChatMiniProgramProperties;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2WeChatMiniProgramEndpointUtils;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
@@ -49,11 +53,15 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	 * @param sessionKey 会话密钥
 	 * @param details 登录信息
 	 * @return 返回 认证信息
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
 	@Override
 	public AbstractAuthenticationToken authenticationToken(Authentication clientPrincipal,
 			Map<String, Object> additionalParameters, Object details, String appid, String code, String openid,
-			Object credentials, String unionid, String sessionKey) {
+			Object credentials, String unionid, String sessionKey) throws OAuth2AuthenticationException {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(weChatMiniProgramProperties.getDefaultRole());
 		authorities.add(authority);
@@ -85,9 +93,14 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	 * @return 返回 <a href=
 	 * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录
 	 * - code2Session</a>
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
 	@Override
-	public Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl) {
+	public Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl)
+			throws OAuth2AuthenticationException {
 		Map<String, String> uriVariables = new HashMap<>(8);
 		uriVariables.put(OAuth2WeChatMiniProgramParameterNames.APPID, appid);
 
@@ -125,9 +138,14 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	 * 根据 appid 获取 微信小程序属性配置
 	 * @param appid 小程序ID
 	 * @return 返回 微信小程序属性配置
+	 * @throws OAuth2AuthenticationException OAuth 2.1 可处理的异常，可使用
+	 * {@link OAuth2AuthorizationServerConfigurer#tokenEndpoint(Customizer)} 中的
+	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
+	 * 拦截处理此异常
 	 */
 	@Override
-	public WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid) {
+	public WeChatMiniProgramProperties.WeChatMiniProgram getWeChatMiniProgramByAppid(String appid)
+			throws OAuth2AuthenticationException {
 		List<WeChatMiniProgramProperties.WeChatMiniProgram> list = weChatMiniProgramProperties.getList();
 		if (list == null) {
 			OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE, "appid 未配置", null);
