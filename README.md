@@ -126,7 +126,7 @@
   ，正式版发布流水线在[gitlab](https://gitlab.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram)
 
 - [快照版](https://s01.oss.sonatype.org/content/repositories/snapshots/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram)
-- [发布版](https://s01.oss.sonatype.org/content/repositories/snapshots/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram)
+- [发布版](https://s01.oss.sonatype.org/content/repositories/releases/cn/com/xuxiaowei/boot/spring-boot-starter-wechat-miniprogram)
 
 ## [更新日志](CHANGELOG.md)
 
