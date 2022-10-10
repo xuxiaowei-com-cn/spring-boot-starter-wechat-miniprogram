@@ -281,6 +281,18 @@ wechat:
 /oauth2/token?grant_type=wechat_miniprogram&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&appid={APPID}&code={CODE}
 ```
 
+## 批量添加远端仓库地址
+
+<details>
+<summary>点击展开</summary>
+git remote add gitee https://gitee.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+git remote add gitlab https://gitlab.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+git remote add jihulab https://jihulab.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+git remote add github https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+git remote add gitcode https://gitcode.net/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+git remote add gitlink https://gitlink.org.cn/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram.git
+</details>
+
 ## 参考文档
 
 - [登录 - code2Session](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html)
