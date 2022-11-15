@@ -109,7 +109,7 @@
   </a>
 
   <a target="_blank" href="https://github.com/xuxiaowei-com-cn/spring-boot-starter-wechat-miniprogram/blob/main/pom.xml">
-    <img alt="OAuth 2.1" src="https://img.shields.io/static/v1?label=OAuth 2.1&message=0.4.0-M2&color=blue">
+    <img alt="OAuth 2.1" src="https://img.shields.io/static/v1?label=OAuth 2.1&message=0.4.0-RC1&color=blue">
   </a>
 
   <a target="_blank" href="https://github.com/alibaba/dragonwell8/releases/tag/dragonwell-8.10.11_jdk8u322-ga">
