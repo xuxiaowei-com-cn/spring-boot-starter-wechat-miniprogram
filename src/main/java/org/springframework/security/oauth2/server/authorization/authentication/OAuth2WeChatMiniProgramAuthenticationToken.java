@@ -83,7 +83,7 @@ public class OAuth2WeChatMiniProgramAuthenticationToken extends OAuth2Authorizat
 	public OAuth2WeChatMiniProgramAuthenticationToken(Authentication clientPrincipal,
 			Map<String, Object> additionalParameters, String appid, String code, String scope) {
 		super(OAuth2WeChatMiniProgramAuthenticationToken.WECHAT_MINIPROGRAM, clientPrincipal, additionalParameters);
-		Assert.hasText(code, "appid 不能为空");
+		Assert.hasText(appid, "appid 不能为空");
 		Assert.hasText(code, "code 不能为空");
 		this.appid = appid;
 		this.code = code;
