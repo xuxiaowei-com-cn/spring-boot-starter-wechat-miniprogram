@@ -21,6 +21,7 @@ package org.springframework.security.oauth2.server.authorization.client;
  */
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -135,6 +136,7 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 
 		Code2SessionResponse code2SessionResponse;
 		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
 			code2SessionResponse = objectMapper.readValue(forObject, Code2SessionResponse.class);
 		}
