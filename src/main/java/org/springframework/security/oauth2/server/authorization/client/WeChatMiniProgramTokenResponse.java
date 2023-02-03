@@ -34,7 +34,7 @@ import java.io.Serializable;
  * "https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html">登录凭证校验</a>
  */
 @Data
-public class WeChatMiniProgramTokenResponse2 implements Serializable {
+public class WeChatMiniProgramTokenResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
