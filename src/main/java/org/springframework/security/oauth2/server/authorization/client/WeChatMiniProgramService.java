@@ -88,7 +88,7 @@ public interface WeChatMiniProgramService {
 	 * {@link OAuth2TokenEndpointConfigurer#errorResponseHandler(AuthenticationFailureHandler)}
 	 * 拦截处理此异常
 	 */
-	WeChatMiniProgramTokenResponse getAccessTokenResponse(String appid, String code, String jsCode2SessionUrl)
+	WeChatMiniProgramTokenResponse2 getAccessTokenResponse(String appid, String code, String jsCode2SessionUrl)
 			throws OAuth2AuthenticationException;
 
 	/**

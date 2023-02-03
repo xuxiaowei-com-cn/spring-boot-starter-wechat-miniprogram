@@ -34,7 +34,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
-import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramTokenResponse;
+import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramTokenResponse2;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2WeChatMiniProgramConfigurerUtils;
 import org.springframework.security.oauth2.server.authorization.context.AuthorizationServerContextHolder;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationProvider;
@@ -131,12 +131,12 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		WeChatMiniProgramTokenResponse weChatMiniProgramTokenResponse = weChatMiniProgramService
+		WeChatMiniProgramTokenResponse2 weChatMiniProgramTokenResponse2 = weChatMiniProgramService
 				.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
 
-		String openid = weChatMiniProgramTokenResponse.getOpenid();
-		String unionid = weChatMiniProgramTokenResponse.getUnionid();
-		String sessionKey = weChatMiniProgramTokenResponse.getSessionKey();
+		String openid = weChatMiniProgramTokenResponse2.getOpenid();
+		String unionid = weChatMiniProgramTokenResponse2.getUnionid();
+		String sessionKey = weChatMiniProgramTokenResponse2.getSessionKey();
 
 		OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(registeredClient);
 		builder.principalName(openid);
