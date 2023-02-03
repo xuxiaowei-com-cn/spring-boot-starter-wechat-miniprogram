@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.authentication;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,9 +32,9 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
-import org.springframework.security.oauth2.server.authorization.client.Code2SessionResponse;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
+import org.springframework.security.oauth2.server.authorization.client.WeChatMiniprogramTokenResponse;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2WeChatMiniProgramConfigurerUtils;
 import org.springframework.security.oauth2.server.authorization.context.AuthorizationServerContextHolder;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationProvider;
@@ -131,12 +131,12 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		Code2SessionResponse code2SessionResponse = weChatMiniProgramService.getCode2SessionResponse(appid, code,
-				JS_CODE2_SESSION_URL);
+		WeChatMiniprogramTokenResponse weChatMiniprogramTokenResponse = weChatMiniProgramService
+				.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
 
-		String openid = code2SessionResponse.getOpenid();
-		String unionid = code2SessionResponse.getUnionid();
-		String sessionKey = code2SessionResponse.getSessionKey();
+		String openid = weChatMiniprogramTokenResponse.getOpenid();
+		String unionid = weChatMiniprogramTokenResponse.getUnionid();
+		String sessionKey = weChatMiniprogramTokenResponse.getSessionKey();
 
 		OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(registeredClient);
 		builder.principalName(openid);
