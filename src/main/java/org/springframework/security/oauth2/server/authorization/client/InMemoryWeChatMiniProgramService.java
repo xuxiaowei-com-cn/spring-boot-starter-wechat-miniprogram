@@ -120,7 +120,7 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	 * 拦截处理此异常
 	 */
 	@Override
-	public Code2SessionResponse getCode2SessionResponse(String appid, String code, String jsCode2SessionUrl)
+	public WeChatMiniprogramTokenResponse getAccessTokenResponse(String appid, String code, String jsCode2SessionUrl)
 			throws OAuth2AuthenticationException {
 		Map<String, String> uriVariables = new HashMap<>(8);
 		uriVariables.put(OAuth2WeChatMiniProgramParameterNames.APPID, appid);
@@ -134,11 +134,11 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 
 		String forObject = restTemplate.getForObject(jsCode2SessionUrl, String.class, uriVariables);
 
-		Code2SessionResponse code2SessionResponse;
+		WeChatMiniprogramTokenResponse accessTokenResponse;
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
-			code2SessionResponse = objectMapper.readValue(forObject, Code2SessionResponse.class);
+			accessTokenResponse = objectMapper.readValue(forObject, WeChatMiniprogramTokenResponse.class);
 		}
 		catch (JsonProcessingException e) {
 			OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE,
@@ -146,14 +146,14 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 			throw new OAuth2AuthenticationException(error, e);
 		}
 
-		String openid = code2SessionResponse.getOpenid();
+		String openid = accessTokenResponse.getOpenid();
 		if (openid == null) {
-			OAuth2Error error = new OAuth2Error(code2SessionResponse.getErrcode(), code2SessionResponse.getErrmsg(),
+			OAuth2Error error = new OAuth2Error(accessTokenResponse.getErrcode(), accessTokenResponse.getErrmsg(),
 					OAuth2WeChatMiniProgramEndpointUtils.AUTH_CODE2SESSION_URI);
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		return code2SessionResponse;
+		return accessTokenResponse;
 	}
 
 	/**
