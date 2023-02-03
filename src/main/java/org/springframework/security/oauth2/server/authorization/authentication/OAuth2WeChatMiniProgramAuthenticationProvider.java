@@ -32,7 +32,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
-import org.springframework.security.oauth2.server.authorization.client.WeChatMiniprogramTokenResponse;
+import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramTokenResponse;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.WeChatMiniProgramService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2WeChatMiniProgramConfigurerUtils;
@@ -131,7 +131,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		WeChatMiniprogramTokenResponse weChatMiniprogramTokenResponse = weChatMiniProgramService
+		WeChatMiniProgramTokenResponse weChatMiniprogramTokenResponse = weChatMiniProgramService
 				.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
 
 		String openid = weChatMiniprogramTokenResponse.getOpenid();

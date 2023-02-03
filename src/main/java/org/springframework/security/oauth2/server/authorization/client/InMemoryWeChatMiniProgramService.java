@@ -120,7 +120,7 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 	 * 拦截处理此异常
 	 */
 	@Override
-	public WeChatMiniprogramTokenResponse getAccessTokenResponse(String appid, String code, String jsCode2SessionUrl)
+	public WeChatMiniProgramTokenResponse getAccessTokenResponse(String appid, String code, String jsCode2SessionUrl)
 			throws OAuth2AuthenticationException {
 		Map<String, String> uriVariables = new HashMap<>(8);
 		uriVariables.put(OAuth2WeChatMiniProgramParameterNames.APPID, appid);
@@ -134,11 +134,11 @@ public class InMemoryWeChatMiniProgramService implements WeChatMiniProgramServic
 
 		String forObject = restTemplate.getForObject(jsCode2SessionUrl, String.class, uriVariables);
 
-		WeChatMiniprogramTokenResponse accessTokenResponse;
+		WeChatMiniProgramTokenResponse accessTokenResponse;
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
-			accessTokenResponse = objectMapper.readValue(forObject, WeChatMiniprogramTokenResponse.class);
+			accessTokenResponse = objectMapper.readValue(forObject, WeChatMiniProgramTokenResponse.class);
 		}
 		catch (JsonProcessingException e) {
 			OAuth2Error error = new OAuth2Error(OAuth2WeChatMiniProgramEndpointUtils.ERROR_CODE,
