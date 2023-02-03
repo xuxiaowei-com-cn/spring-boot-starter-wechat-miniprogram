@@ -131,12 +131,12 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 			throw new OAuth2AuthenticationException(error);
 		}
 
-		WeChatMiniProgramTokenResponse weChatMiniprogramTokenResponse = weChatMiniProgramService
+		WeChatMiniProgramTokenResponse weChatMiniProgramTokenResponse = weChatMiniProgramService
 				.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
 
-		String openid = weChatMiniprogramTokenResponse.getOpenid();
-		String unionid = weChatMiniprogramTokenResponse.getUnionid();
-		String sessionKey = weChatMiniprogramTokenResponse.getSessionKey();
+		String openid = weChatMiniProgramTokenResponse.getOpenid();
+		String unionid = weChatMiniProgramTokenResponse.getUnionid();
+		String sessionKey = weChatMiniProgramTokenResponse.getSessionKey();
 
 		OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(registeredClient);
 		builder.principalName(openid);
