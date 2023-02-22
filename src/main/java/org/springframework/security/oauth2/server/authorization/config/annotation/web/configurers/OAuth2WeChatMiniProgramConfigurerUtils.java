@@ -9,9 +9,9 @@ package org.springframework.security.oauth2.server.authorization.config.annotati
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -48,13 +48,13 @@ public class OAuth2WeChatMiniProgramConfigurerUtils {
 
 	public static WeChatMiniProgramService getWeChatMiniProgramService(HttpSecurity httpSecurity) {
 		WeChatMiniProgramService weChatMiniProgramService = httpSecurity
-				.getSharedObject(WeChatMiniProgramService.class);
+			.getSharedObject(WeChatMiniProgramService.class);
 		if (weChatMiniProgramService == null) {
 			weChatMiniProgramService = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity,
 					WeChatMiniProgramService.class);
 			if (weChatMiniProgramService == null) {
 				WeChatMiniProgramProperties weChatMiniProgramProperties = OAuth2ConfigurerUtils
-						.getOptionalBean(httpSecurity, WeChatMiniProgramProperties.class);
+					.getOptionalBean(httpSecurity, WeChatMiniProgramProperties.class);
 				weChatMiniProgramService = new InMemoryWeChatMiniProgramService(weChatMiniProgramProperties);
 			}
 		}
