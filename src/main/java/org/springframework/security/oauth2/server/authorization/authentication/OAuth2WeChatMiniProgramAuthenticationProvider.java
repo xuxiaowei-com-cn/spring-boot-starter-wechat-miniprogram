@@ -111,7 +111,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 		Set<String> requestedScopes = StringUtils.commaDelimitedListToSet(grantAuthenticationToken.getScope());
 
 		OAuth2ClientAuthenticationToken clientPrincipal = OAuth2AuthenticationProviderUtils
-				.getAuthenticatedClientElseThrowInvalidClient(grantAuthenticationToken);
+			.getAuthenticatedClientElseThrowInvalidClient(grantAuthenticationToken);
 		RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
 		if (registeredClient == null) {
@@ -132,7 +132,7 @@ public class OAuth2WeChatMiniProgramAuthenticationProvider implements Authentica
 		}
 
 		WeChatMiniProgramTokenResponse weChatMiniProgramTokenResponse = weChatMiniProgramService
-				.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
+			.getAccessTokenResponse(appid, code, JS_CODE2_SESSION_URL);
 
 		String openid = weChatMiniProgramTokenResponse.getOpenid();
 		String unionid = weChatMiniProgramTokenResponse.getUnionid();
