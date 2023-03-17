@@ -128,6 +128,8 @@
 - next
     - 支持 JDK 17
 
+## [使用文档](https://www.yuque.com/xuxiaowei-com-cn/xuxiaowei-cloud/third-party-login)
+
 ## 其他 [Spring Boot Starter 项目](https://gitee.com/xuxiaowei-com-cn/spring-boot-starter)
 
 ## 发布
@@ -167,7 +169,7 @@
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-oauth2-authorization-server</artifactId>
-        <version>0.4.0-M1</version>
+        <version>0.4.1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/cn.com.xuxiaowei.boot/spring-boot-starter-wechat-miniprogram -->
