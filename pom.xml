@@ -58,7 +58,7 @@
     </properties>
     <dependencies>
 
-        <!-- OAuth 2.1 依赖，支持 spring-boot 3.0.0 -->
+        <!-- OAuth 2.1 依赖，支持 spring-boot 2.7.x -->
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-authorization-server -->
         <!-- https://oss.sonatype.org/content/repositories/public/org/springframework/security/spring-security-oauth2-authorization-server -->
         <!-- https://repo.spring.io/ui/native/milestone/org/springframework/security/spring-security-oauth2-authorization-server -->
