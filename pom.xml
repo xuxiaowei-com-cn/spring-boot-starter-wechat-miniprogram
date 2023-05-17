@@ -68,7 +68,7 @@
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
             <version>${spring-security-oauth2-authorization-server.version}</version>
             <!-- 依赖传递性：https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html -->
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
