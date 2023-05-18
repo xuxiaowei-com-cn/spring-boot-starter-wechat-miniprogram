@@ -1,5 +1,6 @@
 stages:
   - next
+  - sync
 
 next:
   stage: next
@@ -41,3 +42,6 @@ next:
         - "pom.xml"
         - "settings.xml"
         - "!README.md"
+
+include:
+  - remote: https://jihulab.com/xuxiaowei-com-cn/spring-boot-starter/-/raw/next/sync.yml
