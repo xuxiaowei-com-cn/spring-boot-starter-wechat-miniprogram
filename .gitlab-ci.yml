@@ -12,7 +12,7 @@ main:
     paths:
       - .m2/repository
   script:
-    - GPG_FILE=`find / -name xuxiaowei_0x97A36125_SECRET`
+    - GPG_FILE=`find / -name xuxiaowei_0x30F97859_SECRET`
     - echo $GPG_FILE
     - gpg --import $GPG_FILE
     - sed -i "s#</servers>#<server><id>ossrh</id><username>$ossrh_user</username><password>$ossrh_pass</password></server>&#" settings.xml
